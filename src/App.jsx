@@ -7,8 +7,10 @@ import Cart from "./pages/Cart";
 import WishList from "./pages/WishList";
 import SignIn from "./pages/sign-in";
 import SignUp from "./pages/sign-up";
-import "./i18n";
 import CheckOut from "./pages/CheckOut";
+import Dashboard from "./pages/Dashboard";
+import "./i18n";
+
 function App() {
   return (
     <Router>
@@ -21,6 +23,7 @@ function App() {
         <Route path="/checkout" element={<CheckOut />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/dashboard" element={<Dashboard />} /> {/* Ensure this route is correct */}
       </Routes>
     </Router>
   );
