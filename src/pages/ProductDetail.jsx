@@ -151,6 +151,18 @@ export function ProductDetail() {
           />
 
           <div className="space-y-8">
+          <div className="mt-4">
+    <button
+      className="bg-black text-white py-2 px-4 rounded-full"
+      onClick={() => {
+        const uniqueLink = `${window.location.href}?ref=${user.id}`;
+        navigator.clipboard.writeText(uniqueLink);
+        alert("Affiliate link copied to clipboard!");
+      }}
+    >
+      Generate Affiliate Link
+    </button>
+  </div>
             <div>
               <h1 className="text-3xl font-bold">{productDetail.title}</h1>
               <p className="text-2xl font-medium mt-2">
@@ -210,31 +222,3 @@ export function ProductDetail() {
     </div>
   );
 }
-
-// <RelatedProducts products={RELATED_PRODUCTS} />
-// const RELATED_PRODUCTS = [
-//   {
-//     id: "1",
-//     name: "Polo with Contrast Trims",
-//     price: 120,
-//     image: "https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=800",
-//   },
-//   {
-//     id: "2",
-//     name: "Gradient Graphic T-shirt",
-//     price: 120,
-//     image: "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800",
-//   },
-//   {
-//     id: "3",
-//     name: "Polo with Tipping Details",
-//     price: 120,
-//     image: "https://images.unsplash.com/photo-1578932750294-f5075e85f44a?w=800",
-//   },
-//   {
-//     id: "4",
-//     name: "Black Striped T-shirt",
-//     price: 120,
-//     image: "https://images.unsplash.com/photo-1562157873-818bc0726f68?w=800",
-//   },
-// ];
