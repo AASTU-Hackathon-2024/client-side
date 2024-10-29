@@ -7,12 +7,8 @@ import Cart from "./pages/Cart";
 import WishList from "./pages/WishList";
 import SignIn from "./pages/sign-in";
 import SignUp from "./pages/sign-up";
-<<<<<<< HEAD
 import "./i18n";
-=======
 import CheckOut from "./pages/CheckOut";
-
->>>>>>> b601f066e555dfb79f4c5464132815977051c2f5
 function App() {
   return (
     <Router>
