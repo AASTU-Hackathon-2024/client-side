@@ -7,7 +7,12 @@ import Cart from "./pages/Cart";
 import WishList from "./pages/WishList";
 import SignIn from "./pages/sign-in";
 import SignUp from "./pages/sign-up";
+<<<<<<< HEAD
 import "./i18n";
+=======
+import CheckOut from "./pages/CheckOut";
+
+>>>>>>> b601f066e555dfb79f4c5464132815977051c2f5
 function App() {
   return (
     <Router>
@@ -17,6 +22,7 @@ function App() {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/wish" element={<WishList />} />
+        <Route path="/checkout" element={<CheckOut />} />
         <Route path="/sign-in" element={<SignIn />} />
         <Route path="/sign-up" element={<SignUp />} />
       </Routes>
