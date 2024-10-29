@@ -1,0 +1,23 @@
+{
+    "navbar": {
+      "home": "መነሻ",
+      "shop": "የሱቅ",
+      "cart": "ጋሪ",
+      "wishlist": "ምኞት",
+      "searchPlaceholder": "ለምርቶች ይፈልጉ...",
+      "signIn": "ግባ"
+    },
+    "home": {
+      "newArrivals": "አዲስ መጻኢያት",
+      "topSelling": "ሽያጭ በላይ"
+    },
+    "hero": {
+    "title": "የሚስማሽ አልባሳት\nያግኙ\nበእርስዎ ቅርጽ",
+    "description": "የተቀናገሩ እና ወሳኝ የሆኑ ልብሶችን ያረጋግጡ እና በእርስዎ ቅርጽ በመስማማት ማንነትዎን የሚገልጹ አልባሳትን ያግኙ።",
+    "shopNow": "አሁን ይግዙ",
+    "internationalBrands": "ዓለም አቀፋዊ ብራንዶች",
+    "highQualityProducts": "ጥራታማ እቃዎች",
+    "happyCustomers": "ደስተኞች ደንበኞች"
+  }
+  }
+  

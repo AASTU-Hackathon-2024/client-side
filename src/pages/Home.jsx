@@ -5,7 +5,7 @@ import { ProductGrid } from "../components/ProductGrid";
 import { CategoryGrid } from "../components/CategoryGrid";
 import { Footer } from "../components/Footer";
 import { Link } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 const NEW_ARRIVALS = [
   {
     id: "1",
@@ -60,13 +60,27 @@ const TOP_SELLING = [
   },
 ];
 
+// export function Home() {
+//   return (
+//     <div className="min-h-screen bg-white">
+//       <Navbar />
+//       <Hero />
+//       <ProductGrid title="NEW ARRIVALS" products={NEW_ARRIVALS} />
+//       <ProductGrid title="TOP SELLING" products={TOP_SELLING} />
+//       <CategoryGrid />
+//       <Footer />
+//     </div>
+//   );
+// }
 export function Home() {
+  const { t } = useTranslation();
+
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
       <Hero />
-      <ProductGrid title="NEW ARRIVALS" products={NEW_ARRIVALS} />
-      <ProductGrid title="TOP SELLING" products={TOP_SELLING} />
+      <ProductGrid title={t("home.newArrivals")} products={NEW_ARRIVALS} />
+      <ProductGrid title={t("home.topSelling")} products={TOP_SELLING} />
       <CategoryGrid />
       <Footer />
     </div>

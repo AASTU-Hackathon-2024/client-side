@@ -7,7 +7,7 @@ import Cart from "./pages/Cart";
 import WishList from "./pages/WishList";
 import SignIn from "./pages/sign-in";
 import SignUp from "./pages/sign-up";
-
+import "./i18n";
 function App() {
   return (
     <Router>
