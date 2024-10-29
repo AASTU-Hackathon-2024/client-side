@@ -3,6 +3,8 @@ import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { Minus, Plus, X } from "lucide-react";
 import { useUser } from "@clerk/clerk-react";
+import { useAmount } from "../context/cartContext";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -10,7 +12,10 @@ const Cart = () => {
   const { user } = useUser();
   const [products, setProducts] = useState([]);
   const email = user?.primaryEmailAddress?.emailAddress;
+  const { amount, setAmount } = useAmount();
+  const navigate = useNavigate();
 
+  // Fetch products
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -25,6 +30,7 @@ const Cart = () => {
     fetchProducts();
   }, []);
 
+  // Fetch current user based on email
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -40,6 +46,7 @@ const Cart = () => {
     fetchUser();
   }, [email]);
 
+  // Fetch cart items for the current user
   useEffect(() => {
     const fetchCartItems = async () => {
       if (!currentUser) return;
@@ -56,6 +63,15 @@ const Cart = () => {
     };
     fetchCartItems();
   }, [currentUser]);
+
+  // Calculate amount when cartItems or products change
+  useEffect(() => {
+    const updatedAmount = cartItems.reduce((sum, item) => {
+      const product = products.find((p) => p.productId === item.productId);
+      return sum + (product?.price || 0) * item.quantity;
+    }, 0);
+    setAmount(updatedAmount);
+  }, [cartItems, products, setAmount]);
 
   const handleRemoveItem = async (itemId) => {
     try {
@@ -110,11 +126,6 @@ const Cart = () => {
     }
   };
 
-  const cartItemsProductId = cartItems.map((item) => item.productId);
-  const productFiltered = products.filter((item) =>
-    cartItemsProductId.includes(item.productId)
-  );
-
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0
@@ -130,20 +141,21 @@ const Cart = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           <div className="lg:col-span-8">
             <div className="space-y-8">
-              {productFiltered.map((item) => {
-                const cartItem = cartItems.find(
-                  (i) => i.productId === item.productId
+              {cartItems.map((cartItem) => {
+                const product = products.find(
+                  (item) => item.productId === cartItem.productId
                 );
+                if (!product) return null;
                 return (
-                  <div key={item.id} className="flex gap-6">
+                  <div key={cartItem.id} className="flex gap-6">
                     <img
-                      src={JSON.parse(item.variations?.[0]?.imgUrl)}
-                      alt={item.title}
+                      src={JSON.parse(product.variations?.[0]?.imgUrl)}
+                      alt={product.title}
                       className="w-24 h-24 object-cover rounded-lg"
                     />
                     <div className="flex-1">
                       <div className="flex justify-between">
-                        <h3 className="font-medium">{item.title}</h3>
+                        <h3 className="font-medium">{product.title}</h3>
                         <button
                           className="text-gray-400 hover:text-gray-500"
                           onClick={() => handleRemoveItem(cartItem.id)}
@@ -172,7 +184,7 @@ const Cart = () => {
                             <Plus size={16} />
                           </button>
                         </div>
-                        <p className="font-medium">Br {item.price}</p>
+                        <p className="font-medium">Br {product.price}</p>
                       </div>
                     </div>
                   </div>
@@ -187,7 +199,7 @@ const Cart = () => {
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <span className="text-gray-600">Subtotal</span>
-                  <span>Br {subtotal}</span>
+                  <span>Br {amount}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-gray-600">Delivery Fee</span>
@@ -196,11 +208,14 @@ const Cart = () => {
                 <div className="border-t pt-4">
                   <div className="flex justify-between font-bold">
                     <span>Total</span>
-                    <span>Br {total}</span>
+                    <span>Br {amount + deliveryFee}</span>
                   </div>
                 </div>
               </div>
-              <button className="w-full bg-black text-white py-3 rounded-full mt-6 font-medium hover:bg-gray-900">
+              <button
+                onClick={() => navigate("/checkout")}
+                className="w-full bg-black text-white py-3 rounded-full mt-6 font-medium hover:bg-gray-700"
+              >
                 Go to Checkout
               </button>
             </div>

@@ -155,13 +155,14 @@ export function Shop() {
                   key={product.id}
                   className="flex flex-col gap-1 items-center"
                 >
+                  {console.log(product)}
                   <Link
                     to={`/product/${product.id}`}
                     className="group cursor-pointer"
                   >
                     <div className="relative overflow-hidden rounded-lg bg-gray-100">
                       <img
-                        src={JSON.parse(product.variations?.at(0)?.imgUrl)}
+                        src={JSON.parse(product.variations?.[0]?.imgUrl)}
                         alt={product.title}
                         className="w-full h-72 transition-transform group-hover:scale-105 object-cover "
                       />
