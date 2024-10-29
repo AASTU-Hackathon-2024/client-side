@@ -6,6 +6,7 @@ import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import { useAmount } from "../context/cartContext";
 import { useUser } from "@clerk/clerk-react";
+import { redirect, useNavigate } from "react-router-dom";
 
 export default function CheckOut() {
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -21,6 +22,7 @@ export default function CheckOut() {
   const email = user?.primaryEmailAddress?.emailAddress;
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Set the amount from context when the component mounts
@@ -108,8 +110,8 @@ export default function CheckOut() {
           isBnpl: paymentMethod === "bnpl" ? true : false,
         }),
       });
-      console.log("success");
-      console.log(orderder);
+      alert("Order created successfully");
+      navigate("/");
     } catch (error) {
       console.error("Error creating order:", error);
     }
