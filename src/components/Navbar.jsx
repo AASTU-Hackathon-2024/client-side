@@ -182,9 +182,11 @@ export function Navbar() {
       </div>
 
       {showDialog && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="fixed z-10 z- inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-bold mb-4">Upload Image for Reverse Search</h2>
+            <h2 className="text-xl font-bold mb-4">
+              Upload Image for Reverse Search
+            </h2>
             <input
               type="file"
               accept="image/*"
